@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autoliv Hirotako - ERT Fire Training</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #f8fafc; }
+    .subtitle-my { color: #94a3b8; font-size: 0.85em; font-weight: 500; font-style: italic; margin-top: -2px; display: block; }
+    
+    /* Triangle Branding */
+    .triangle-container { position: relative; width: 280px; height: 240px; margin: 40px auto; }
+    .triangle-border {
+        width: 0; height: 0;
+        border-left: 140px solid transparent;
+        border-right: 140px solid transparent;
+        border-bottom: 240px solid #1e293b;
+        position: relative;
+    }
+    .triangle-content {
+        position: absolute; top: 8px; left: -132px;
+        width: 0; height: 0;
+        border-left: 132px solid transparent;
+        border-right: 132px solid transparent;
+        border-bottom: 226px solid #ffffff;
+    }
+    .label-float {
+        position: absolute; padding: 6px 14px; border-radius: 99px; font-weight: 800; font-size: 0.75rem;
+        text-align: center; color: white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); white-space: nowrap;
+    }
+    .l-heat { top: -30px; left: 50%; transform: translateX(-50%); background: #ef4444; }
+    .l-fuel { bottom: -10px; left: -90px; background: #f59e0b; }
+    .l-oxygen { bottom: -10px; right: -90px; background: #3b82f6; }
+
+    .fire-anim {
+        position: absolute; top: 150px; left: 50%; transform: translate(-50%, -50%);
+        font-size: 4.5rem; animation: flicker 1s infinite alternate;
+    }
+    @keyframes flicker {
+        from { transform: translate(-50%, -50%) scale(1); filter: drop-shadow(0 0 5px #f97316); }
+        to { transform: translate(-50%, -52%) scale(1.1); filter: drop-shadow(0 0 15px #ef4444); }
+    }
+
+    /* PASS Animations */
+    @keyframes pin-pull { 0% { transform: translateX(0); } 50% { transform: translateX(25px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+    .ani-pin { animation: pin-pull 2s infinite; }
+    
+    @keyframes nozzle-aim { 0% { transform: rotate(0); } 50% { transform: rotate(20deg); } 100% { transform: rotate(0); } }
+    .ani-aim { animation: nozzle-aim 2s infinite; transform-origin: 20% 50%; }
+
+    @keyframes lever-sq { 0% { transform: scaleY(1); } 50% { transform: scaleY(0.7); } 100% { transform: scaleY(1); } }
+    .ani-sq { animation: lever-sq 1s infinite; transform-origin: top; }
+
+    @keyframes sweep-mv { 0% { transform: translateX(-15px); } 50% { transform: translateX(15px); } 100% { transform: translateX(-15px); } }
+    .ani-sweep { animation: sweep-mv 1.5s infinite ease-in-out; }
+
+    /* Matrix Styling */
+    .status-yes { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+    .status-no { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; opacity: 0.5; }
+    .status-danger { background: #ef4444; color: #ffffff; border: 2px solid #991b1b; animation: pulse-red 2s infinite; }
+    
+    @keyframes pulse-red { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
+</style>
+</head>
+<body class="text-slate-900">
+
+<nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="flex flex-col">
+            <span class="text-xl font-black tracking-tighter text-slate-900 uppercase">Autoliv <span class="text-red-600">Hirotako</span></span>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest -mt-1">ERT Team | Pasukan Tindakan Kecemasan</span>
+        </div>
+        <div class="hidden md:flex items-center space-x-6 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+            <a href="#triangle" class="hover:text-red-600 transition">Triangle / Segitiga</a>
+            <a href="#classes" class="hover:text-red-600 transition">Classes / Klasifikasi</a>
+            <a href="#pass" class="hover:text-red-600 transition">PASS / Kaedah</a>
+        </div>
+    </div>
+</nav>
+
+<header class="bg-slate-900 text-white py-16 px-6 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-red-900/40 via-transparent to-transparent"></div>
+    <div class="max-w-4xl mx-auto relative">
+        <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tight mb-2">Fire Extinguisher Training</h1>
+        <h2 class="text-xl md:text-2xl font-bold text-red-500 uppercase italic">Latihan Pemadam Api</h2>
+        <div class="mt-6 flex items-center gap-3">
+            <span class="bg-red-600 px-3 py-1 rounded-full text-[10px] font-black uppercase">Standard MS 1539</span>
+            <span class="text-slate-500 text-[10px] font-bold uppercase tracking-widest">BOMBA Compliant Module</span>
+        </div>
+    </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-6 py-12 space-y-24">
+
+    <!-- Section 1: Triangle -->
+    <section id="triangle" class="scroll-mt-24">
+        <div class="mb-10 text-center md:text-left">
+            <h2 class="text-3xl font-black uppercase tracking-tighter">1. The Fire Triangle</h2>
+            <span class="subtitle-my">Segitiga Api</span>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <div class="p-6 bg-slate-50 rounded-2xl border-l-4 border-red-500">
+                    <p class="text-lg font-bold text-slate-700">Remove one, and the fire dies.</p>
+                    <p class="text-sm text-slate-500 italic">Alihkan satu, dan api akan padam.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="flex items-center gap-4 group">
+                        <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-xl group-hover:scale-110 transition">🌡️</div>
+                        <div>
+                            <div class="font-black text-sm">HEAT / <span class="text-red-600 uppercase">Haba</span></div>
+                            <p class="text-xs text-slate-500 font-medium">Energy to start the fire. / Tenaga untuk memulakan api.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 group">
+                        <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-xl group-hover:scale-110 transition">🪵</div>
+                        <div>
+                            <div class="font-black text-sm">FUEL / <span class="text-amber-600 uppercase">Bahan Bakar</span></div>
+                            <p class="text-xs text-slate-500 font-medium">Paper, wood, or gas. / Kertas, kayu, atau gas.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 group">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-xl group-hover:scale-110 transition">💨</div>
+                        <div>
+                            <div class="font-black text-sm">OXYGEN / <span class="text-blue-600 uppercase">Oksigen</span></div>
+                            <p class="text-xs text-slate-500 font-medium">Found in the air. / Didapati dalam udara.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="triangle-container">
+                <div class="triangle-border">
+                    <div class="triangle-content">
+                        <div class="fire-anim">🔥</div>
+                    </div>
+                </div>
+                <div class="label-float l-heat">HEAT / HABA</div>
+                <div class="label-float l-fuel">FUEL / BAHAN BAKAR</div>
+                <div class="label-float l-oxygen">OXYGEN / OKSIGEN</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: BOMBA COMPLIANT MATRIX -->
+    <section id="classes" class="scroll-mt-24">
+        <div class="mb-10 text-center">
+            <h2 class="text-3xl font-black uppercase tracking-tighter">2. Which Extinguisher to use?</h2>
+            <span class="subtitle-my">Pemadam mana yang hendak digunakan? (Standard MS 1539)</span>
+        </div>
+
+        <div class="bg-slate-900 rounded-3xl p-4 sm:p-8 overflow-x-auto">
+            <table class="w-full min-w-[700px] border-separate border-spacing-2">
+                <thead>
+                    <tr>
+                        <th class="p-4"></th>
+                        <th class="p-2 text-center">
+                            <div class="bg-white/10 rounded-xl p-3">
+                                <span class="block text-2xl mb-1">🪵</span>
+                                <span class="block text-[10px] font-black text-white uppercase tracking-tighter leading-none">Class A</span>
+                                <span class="block text-[8px] text-slate-400 font-bold uppercase italic">Solid Materials</span>
+                            </div>
+                        </th>
+                        <th class="p-2 text-center">
+                            <div class="bg-white/10 rounded-xl p-3">
+                                <span class="block text-2xl mb-1">⛽</span>
+                                <span class="block text-[10px] font-black text-white uppercase tracking-tighter leading-none">Class B</span>
+                                <span class="block text-[8px] text-slate-400 font-bold uppercase italic">Flammable Liquid</span>
+                            </div>
+                        </th>
+                        <th class="p-2 text-center">
+                            <div class="bg-white/10 rounded-xl p-3">
+                                <span class="block text-2xl mb-1">⚡</span>
+                                <span class="block text-[10px] font-black text-white uppercase tracking-tighter leading-none">Class C</span>
+                                <span class="block text-[8px] text-slate-400 font-bold uppercase italic">Electrical</span>
+                            </div>
+                        </th>
+                        <th class="p-2 text-center">
+                            <div class="bg-white/10 rounded-xl p-3">
+                                <span class="block text-2xl mb-1">🍳</span>
+                                <span class="block text-[10px] font-black text-white uppercase tracking-tighter leading-none">Class K</span>
+                                <span class="block text-[8px] text-slate-400 font-bold uppercase italic">Cooking Oil</span>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Water -->
+                    <tr>
+                        <td class="p-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-blue-500 rounded flex items-center justify-center text-white font-bold text-[10px]">W</div>
+                                <div class="text-left">
+                                    <div class="text-white text-[11px] font-black uppercase tracking-tighter leading-none">Water</div>
+                                    <div class="text-[9px] text-slate-500 font-bold uppercase italic">Air</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-2"><div class="status-yes rounded-xl p-3 text-center font-black text-xs">✅ YES</div></td>
+                        <td class="p-2"><div class="status-no rounded-xl p-3 text-center font-black text-xs">❌ NO</div></td>
+                        <td class="p-2"><div class="status-no rounded-xl p-3 text-center font-black text-xs">❌ NO</div></td>
+                        <td class="p-2"><div class="status-danger rounded-xl p-3 text-center font-black text-xs">⚠️ DANGER</div></td>
+                    </tr>
+                    <!-- Foam -->
+                    <tr>
+                        <td class="p-4 border-t border-white/5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-amber-100 rounded flex items-center justify-center text-slate-900 font-bold text-[10px]">F</div>
+                                <div class="text-left">
+                                    <div class="text-white text-[11px] font-black uppercase tracking-tighter leading-none">Foam</div>
+                                    <div class="text-[9px] text-slate-500 font-bold uppercase italic">Buih</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-2"><div class="status-yes rounded-xl p-3 text-center font-black text-xs">✅ YES</div></td>
+                        <td class="p-2"><div class="status-yes rounded-xl p-3 text-center font-black text-xs">✅ YES</div></td>
+                        <td class="p-2"><div class="status-no rounded-xl p-3 text-center font-black text-xs">❌ NO</div></td>
+                        <td class="p-2"><div class="status-no rounded-xl p-3 text-center font-black text-xs">❌ NO</div></td>
+                    </tr>
+                    <!-- Powder -->
+                    <tr>
+                        <td class="p-4 border-t border-white/5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-bold text-[10px]">P</div>
+                                <div class="text-left">
+                                    <div class="text-white text-[11px] font-black uppercase tracking-tighter leading-none">Dry Powder</div>
+                                    <div class="text-[9px] text-slate-500 font-bold uppercase italic">Serbuk Kering</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-2"><div class="status-yes rounded-xl p-3 text-center font-black text-xs">✅ YES</div></td>
+                        <td class="p-2"><div class="status-yes rounded-xl p-3 text-center font-black text-xs">✅ YES</div></td>
+                        <td class="p-2"><div class="status-yes rounded-xl p-3 text-center font-black text-xs">✅ YES</div></td>
+                        <td class="p-2"><div class="status-no rounded-xl p-3 text-center font-black text-xs">❌ NO</div></td>
+                    </tr>
+                    <!-- CO2 -->
+                    <tr>
+                        <td class="p-4 border-t border-white/5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-black border border-white/20 rounded flex items-center justify-center text-white font-bold text-[10px]">C</div>
+                                <div class="text-left">
+                                    <div class="text-white text-[11px] font-black uppercase tracking-tighter leading-none">CO2 Gas</div>
+                                    <div class="text-[9px] text-slate-500 font-bold uppercase italic">K. Dioksida</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-2"><div class="status-no rounded-xl p-3 text-center font-black text-xs">❌ NO</div></td>
+                        <td class="p-2"><div class="status-yes rounded-xl p-3 text-center font-black text-xs">✅ YES</div></td>
+                        <td class="p-2"><div class="status-yes rounded-xl p-3 text-center font-black text-xs">✅ YES</div></td>
+                        <td class="p-2"><div class="status-no rounded-xl p-3 text-center font-black text-xs">❌ NO</div></td>
+                    </tr>
+                    <!-- Wet Chemical -->
+                    <tr>
+                        <td class="p-4 border-t border-white/5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-yellow-400 rounded flex items-center justify-center text-slate-900 font-bold text-[10px]">K</div>
+                                <div class="text-left">
+                                    <div class="text-white text-[11px] font-black uppercase tracking-tighter leading-none">Wet Chem</div>
+                                    <div class="text-[9px] text-yellow-500 font-bold uppercase italic">Kimia Basah</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-2"><div class="status-no rounded-xl p-3 text-center font-black text-xs">❌ NO</div></td>
+                        <td class="p-2"><div class="status-no rounded-xl p-3 text-center font-black text-xs">❌ NO</div></td>
+                        <td class="p-2"><div class="status-no rounded-xl p-3 text-center font-black text-xs">❌ NO</div></td>
+                        <td class="p-2"><div class="status-yes rounded-xl p-3 text-center font-black text-xs">✅ YES</div></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- Warning Note -->
+            <div class="mt-6 p-4 bg-red-600/20 border border-red-600/40 rounded-xl text-center">
+                <p class="text-red-500 text-xs font-black uppercase tracking-widest leading-none mb-1">
+                    ⚠️ NEVER USE WATER ON OIL FIRES! It will explode.
+                </p>
+                <p class="text-red-400 text-[10px] font-bold italic">
+                    JANGAN GUNAKAN AIR PADA KEBAKARAN MINYAK! Ia akan meletup.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: PASS -->
+    <section id="pass" class="scroll-mt-24">
+        <div class="mb-10 text-center md:text-left">
+            <h2 class="text-3xl font-black uppercase tracking-tighter">3. How to use it? (PASS)</h2>
+            <span class="subtitle-my">Bagaimana cara menggunakannya?</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- P -->
+            <div class="bg-white rounded-2xl p-6 border-b-4 border-red-500 shadow-sm text-center">
+                <div class="h-24 flex items-center justify-center mb-4">
+                    <svg viewBox="0 0 100 100" class="w-16 h-16">
+                        <circle cx="50" cy="50" r="30" fill="none" stroke="#ef4444" stroke-width="6" />
+                        <rect x="30" y="48" width="40" height="6" fill="#ef4444" class="ani-pin" />
+                    </svg>
+                </div>
+                <h3 class="font-black text-xl leading-none">PULL</h3>
+                <p class="text-[10px] font-bold text-slate-400 uppercase italic mb-4">Tarik pin keselamatan</p>
+                <p class="text-xs text-slate-600">Break the seal and pull the pin. / Pecahkan kunci dan tarik pin.</p>
+            </div>
+            <!-- A -->
+            <div class="bg-white rounded-2xl p-6 border-b-4 border-amber-500 shadow-sm text-center">
+                <div class="h-24 flex items-center justify-center mb-4">
+                    <svg viewBox="0 0 100 100" class="w-16 h-16 ani-aim">
+                        <path d="M20 80 Q 50 80 85 30" fill="none" stroke="#f59e0b" stroke-width="8" stroke-linecap="round" />
+                        <circle cx="85" cy="30" r="5" fill="#f59e0b" />
+                    </svg>
+                </div>
+                <h3 class="font-black text-xl leading-none">AIM</h3>
+                <p class="text-[10px] font-bold text-slate-400 uppercase italic mb-4">Hala muncung ke pangkal api</p>
+                <p class="text-xs text-slate-600">Aim at the base of the fire. / Tala ke pangkal api.</p>
+            </div>
+            <!-- S -->
+            <div class="bg-white rounded-2xl p-6 border-b-4 border-blue-500 shadow-sm text-center">
+                <div class="h-24 flex items-center justify-center mb-4">
+                    <svg viewBox="0 0 100 100" class="w-16 h-16">
+                        <path d="M20 40 L 80 40 M 20 65 L 80 65" stroke="#3b82f6" stroke-width="10" stroke-linecap="round" class="ani-sq" />
+                    </svg>
+                </div>
+                <h3 class="font-black text-xl leading-none">SQUEEZE</h3>
+                <p class="text-[10px] font-bold text-slate-400 uppercase italic mb-4">Tekan pemegang</p>
+                <p class="text-xs text-slate-600">Squeeze the lever slowly. / Tekan pemegang perlahan-lahan.</p>
+            </div>
+            <!-- S -->
+            <div class="bg-white rounded-2xl p-6 border-b-4 border-slate-700 shadow-sm text-center">
+                <div class="h-24 flex items-center justify-center mb-4">
+                    <div class="ani-sweep">
+                        <div class="w-4 h-4 bg-slate-300 rounded-full blur-sm mx-auto mb-1"></div>
+                        <div class="w-12 h-16 bg-gradient-to-t from-slate-200 to-transparent rounded-full mx-auto"></div>
+                    </div>
+                </div>
+                <h3 class="font-black text-xl leading-none">SWEEP</h3>
+                <p class="text-[10px] font-bold text-slate-400 uppercase italic mb-4">Leret dari sisi ke sisi</p>
+                <p class="text-xs text-slate-600">Move side to side. / Sapu dari kiri ke kanan.</p>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="bg-slate-900 text-slate-500 py-16 px-6 border-t border-slate-800 text-center">
+    <div class="max-w-4xl mx-auto space-y-6">
+        <div class="text-2xl font-black text-white uppercase tracking-tighter">Autoliv <span class="text-red-600">Hirotako</span></div>
+        <div class="text-[10px] font-bold tracking-[0.4em] uppercase text-slate-400">ERT TEAM Training Module</div>
+        <p class="text-[10px] uppercase font-black text-red-500 tracking-widest">In case of emergency, call 999</p>
+        <div class="pt-8 text-[10px] border-t border-white/5 opacity-50">
+            &copy; 2026 Autoliv Hirotako ERT Team.
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
